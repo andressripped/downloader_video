@@ -45,26 +45,32 @@ def extract_tiktok(url: str):
             'original_url': url
         }
 
-def download_tiktok(url: str, filename: str, format_type: str = "hd") -> str:
+def download_tiktok(url: str, filename: str, format_type: str = "h264") -> str:
     import os
     temp_dir = os.path.join(os.path.dirname(__file__), "temp")
     os.makedirs(temp_dir, exist_ok=True)
     filepath = os.path.join(temp_dir, filename)
     
-    # En yt-dlp para TikTok, el formato con ID 'download' es el que tiene la marca de agua (Estándar).
-    # Los demás formatos (bytevc1, h264) son sin marca de agua (HD).
-    format_str = 'best[format_id!=download]' if format_type == 'hd' else 'download'
+    # Filtramos para asegurarnos de que sean sin marca de agua (excluyendo el id 'download')
+    if format_type == 'h265':
+        format_str = 'best[format_id!=download][vcodec^=h265]/best[format_id!=download][vcodec^=bytevc1]/best[format_id!=download]'
+        format_sort = []
+    else:
+        format_str = 'best[format_id!=download][vcodec^=h264]/best[format_id!=download]'
+        format_sort = ['size'] # Fuerza el archivo de mayor peso
     
     ydl_opts = {
         'quiet': True,
         'no_warnings': True,
         'outtmpl': filepath,
         'format': format_str,
-        'format_sort': ['size'],
         'http_headers': {
             'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         }
     }
+    
+    if format_sort:
+        ydl_opts['format_sort'] = format_sort
     
     # Si el archivo ya existe por descargas previas fallidas, lo borramos
     if os.path.exists(filepath):

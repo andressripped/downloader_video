@@ -51,7 +51,7 @@ async def download_stream(url: str, filename: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/download/tiktok")
-async def download_tiktok_endpoint(url: str, filename: str, background_tasks: BackgroundTasks, format_type: str = "hd"):
+async def download_tiktok_endpoint(url: str, filename: str, background_tasks: BackgroundTasks, format_type: str = "h264"):
     from app.downloaders.tiktok import download_tiktok
     try:
         filepath = download_tiktok(url, filename, format_type)

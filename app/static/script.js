@@ -66,13 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (data.platform === 'tiktok') {
             if (data.original_url) {
-                const hdUrl = `/api/download/tiktok?url=${encodeURIComponent(data.original_url)}&format_type=hd&filename=${filenameBase}_hd.mp4`;
-                html += `<a href="${hdUrl}" class="btn-download primary" target="_blank">⬇️ Descargar HD (Sin Marca de Agua)</a>`;
-                
-                const sdUrl = `/api/download/tiktok?url=${encodeURIComponent(data.original_url)}&format_type=sd&filename=${filenameBase}_sd.mp4`;
-                html += `<a href="${sdUrl}" class="btn-download" target="_blank">⬇️ Descargar Estándar</a>`;
+                const hdH264Url = `/api/download/tiktok?url=${encodeURIComponent(data.original_url)}&format_type=h264&filename=${filenameBase}_h264.mp4`;
+                html += `<a href="${hdH264Url}" class="btn-download primary" target="_blank">⬇️ Descargar HD (Video Pesado H.264)</a>`;
+
+                const hdH265Url = `/api/download/tiktok?url=${encodeURIComponent(data.original_url)}&format_type=h265&filename=${filenameBase}_h265.mp4`;
+                html += `<a href="${hdH265Url}" class="btn-download" target="_blank">⬇️ Descargar HD (Comprimido H.265)</a>`;
             } else {
-                 if (data.hd_url) {
+                if (data.hd_url) {
                     const url = `/api/download/stream?url=${encodeURIComponent(data.hd_url)}&filename=${filenameBase}_hd.mp4`;
                     html += `<a href="${url}" class="btn-download primary" target="_blank">⬇️ Descargar HD (Sin Marca de Agua)</a>`;
                 }
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const urls = data.urls.join(',');
                 const zipUrl = `/api/download/zip?urls=${encodeURIComponent(urls)}&title=${filenameBase}`;
                 html += `<a href="${zipUrl}" class="btn-download primary" target="_blank">⬇️ Descargar Carrusel Completo (.zip)</a>`;
-                
+
             } else if (data.type === 'video' || data.type === 'photo' || data.type === 'profile') {
                 const ext = data.type === 'video' ? 'mp4' : 'jpg';
                 const url = `/api/download/stream?url=${encodeURIComponent(data.hd_url)}&filename=${filenameBase}.${ext}`;
