@@ -51,8 +51,9 @@ def download_tiktok(url: str, filename: str, format_type: str = "hd") -> str:
     os.makedirs(temp_dir, exist_ok=True)
     filepath = os.path.join(temp_dir, filename)
     
-    # download_addr suele ser HD sin marca de agua, play_addr es estándar con marca
-    format_str = 'best[format_id*=download_addr]/bestvideo[format_id*=download_addr]/best' if format_type == 'hd' else 'best[format_id*=play_addr]/bestvideo[format_id*=play_addr]/best'
+    # En yt-dlp para TikTok, el formato con ID 'download' es el que tiene la marca de agua (Estándar).
+    # Los demás formatos (bytevc1, h264) son sin marca de agua (HD).
+    format_str = 'best[format_id!=download]' if format_type == 'hd' else 'download'
     
     ydl_opts = {
         'quiet': True,
