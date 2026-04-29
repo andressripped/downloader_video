@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Downloader | HD & No Watermark</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Social<span>Downloader</span></h1>
+            <p>Descarga contenido de TikTok e Instagram en calidad original.</p>
+        </header>
+
+        <main>
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                    <input type="text" id="urlInput" placeholder="Pega el enlace de TikTok o Instagram aquí..." autocomplete="off">
+                </div>
+                <button id="extractBtn">
+                    Analizar
+                </button>
+            </div>
+
+            <div id="statusArea" class="hidden">
+                <div class="spinner"></div>
+                <p id="statusText">Analizando calidad máxima...</p>
+            </div>
+
+            <div id="errorArea" class="hidden"></div>
+            
+            <div id="resultArea" class="hidden">
+                <!-- Contenido dinámico -->
+            </div>
+        </main>
+    </div>
+    <script src="/static/script.js?v=3"></script>
+</body>
+</html>
