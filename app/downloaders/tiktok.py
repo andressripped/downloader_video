@@ -39,6 +39,7 @@ def extract_tiktok(url: str):
         return {
             'platform': 'tiktok',
             'title': title,
+            'description': info.get('description', ''),
             'thumbnail': info.get('thumbnail'),
             'hd_url': hd_url,
             'sd_url': sd_url,

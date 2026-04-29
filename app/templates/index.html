@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Downloader</title>
-    <!-- Google Fonts -->
+    <title>Social Media Downloader</title>
+    <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS (Framework Minimalista v3.4) -->
+    <!-- Tailwind CSS v3.4 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -17,79 +17,71 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
     
-    <!-- FontAwesome para Iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- CSS Adicional para Animaciones -->
     <link rel="stylesheet" href="/static/style.css">
 </head>
-<body class="bg-[#0b1120] text-slate-200 font-sans min-h-screen flex items-center justify-center p-4 selection:bg-blue-500/30 relative">
+<body class="bg-zinc-950 text-zinc-300 font-sans min-h-screen flex items-center justify-center p-4 selection:bg-zinc-800">
     
-    <!-- Fondo Decorativo (Glow Orbs) -->
-    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <div class="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px]"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-600/10 blur-[120px]"></div>
-    </div>
-
     <div class="w-full max-w-lg">
-        <!-- Encabezado -->
-        <header class="text-center mb-10">
-            <h1 class="text-4xl md:text-5xl font-bold mb-3 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
-                Social Downloader
-            </h1>
-            <p class="text-slate-400 text-sm md:text-base font-light">Descarga contenido en calidad original, sin marcas de agua.</p>
+        <header class="mb-10 text-center">
+            <h1 class="text-3xl font-semibold mb-2 text-white">Social Downloader</h1>
+            <p class="text-zinc-500 text-sm">Herramienta de extracción de medios en calidad original.</p>
         </header>
 
-        <!-- Tarjeta Principal (Glassmorphism) -->
-        <main class="bg-slate-900/40 backdrop-blur-xl border border-slate-800/60 rounded-[2rem] p-6 md:p-8 shadow-2xl">
-            <form id="downloadForm" class="space-y-5">
+        <main class="bg-zinc-900/50 border border-zinc-800/80 rounded-xl p-6 md:p-8 shadow-sm">
+            <form id="downloadForm" class="space-y-4">
                 <div>
-                    <label for="urlInput" class="block text-sm font-medium text-slate-400 mb-2 ml-1">Enlace del video o foto</label>
+                    <label for="urlInput" class="block text-xs font-medium text-zinc-500 mb-2 uppercase tracking-wider">URL del Recurso</label>
                     <div class="relative group">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-blue-500 text-slate-500">
-                            <i class="fa-solid fa-link"></i>
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-500">
+                            <i data-lucide="link" class="w-4 h-4"></i>
                         </div>
-                        <input type="url" id="urlInput" required placeholder="Pega el enlace aquí..." 
-                            class="block w-full pl-11 pr-4 py-4 bg-slate-950/50 border border-slate-700/50 rounded-2xl focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-slate-200 placeholder-slate-600 outline-none shadow-inner">
+                        <input type="url" id="urlInput" required placeholder="https://..." 
+                            class="block w-full pl-10 pr-4 py-3 bg-zinc-950/50 border border-zinc-800 rounded-lg focus:ring-1 focus:ring-white focus:border-white transition-all text-zinc-200 placeholder-zinc-600 outline-none text-sm">
                     </div>
                 </div>
                 <button type="submit" id="submitBtn" 
-                    class="w-full py-4 bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white font-semibold rounded-2xl shadow-[0_0_20px_rgba(37,99,235,0.2)] hover:shadow-[0_0_25px_rgba(37,99,235,0.4)] transition-all flex justify-center items-center gap-2">
-                    <i class="fa-solid fa-bolt"></i>
+                    class="w-full py-3 bg-white hover:bg-zinc-200 active:scale-[0.99] text-black font-medium rounded-lg transition-all flex justify-center items-center gap-2 text-sm">
+                    <i data-lucide="zap" class="w-4 h-4"></i>
                     <span>Analizar Enlace</span>
                 </button>
             </form>
 
-            <!-- Estado de Carga -->
-            <div id="loading" class="hidden mt-8 text-center animate-fade-in">
-                <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-slate-800 border-t-blue-500 mb-4 shadow-[0_0_15px_rgba(37,99,235,0.5)]"></div>
-                <p class="text-slate-400 font-medium text-sm">Procesando magia digital...</p>
+            <!-- Loading State -->
+            <div id="loading" class="hidden mt-8 text-center animate-fade-in flex flex-col items-center">
+                <i data-lucide="loader-2" class="w-6 h-6 animate-spin text-zinc-500 mb-3"></i>
+                <p class="text-zinc-500 text-sm">Procesando solicitud...</p>
             </div>
 
-            <!-- Alerta de Error -->
-            <div id="error" class="hidden mt-6 p-4 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-400 text-sm text-center flex flex-col items-center gap-2 animate-fade-in">
-                <i class="fa-solid fa-circle-exclamation text-xl"></i>
-                <span id="errorMessage"></span>
+            <!-- Error Alert -->
+            <div id="error" class="hidden mt-6 p-4 bg-red-950/30 border border-red-900/50 rounded-lg text-red-400 text-sm flex items-start gap-3 animate-fade-in">
+                <i data-lucide="alert-circle" class="w-5 h-5 flex-shrink-0 mt-0.5"></i>
+                <span id="errorMessage" class="leading-relaxed"></span>
             </div>
 
-            <!-- Resultados -->
-            <div id="result" class="hidden mt-8 space-y-6">
-                <!-- Se inyecta vía JavaScript -->
+            <!-- Results -->
+            <div id="result" class="hidden mt-8 space-y-5">
+                <!-- Injected via JS -->
             </div>
         </main>
         
-        <footer class="mt-12 text-center text-slate-600 text-xs flex items-center justify-center gap-2">
-            <span>Diseñado con <i class="fa-solid fa-heart text-red-500/70"></i> para una experiencia premium</span>
+        <footer class="mt-10 text-center text-zinc-600 text-xs flex items-center justify-center gap-1.5">
+            <span>Social Downloader v2.0</span>
         </footer>
     </div>
 
-    <script src="/static/script.js?v=6"></script>
+    <script src="/static/script.js?v=7"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

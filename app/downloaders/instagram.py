@@ -90,6 +90,7 @@ def _extract_ig_video(url: str):
             'platform': 'instagram',
             'type': 'video',
             'title': info.get('title', 'ig_video'),
+            'description': info.get('description', ''),
             'thumbnail': info.get('thumbnail'),
             'hd_url': info.get('url')
         }
