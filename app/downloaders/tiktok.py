@@ -52,7 +52,7 @@ def download_tiktok(url: str, filename: str, format_type: str = "hd") -> str:
     filepath = os.path.join(temp_dir, filename)
     
     # download_addr suele ser HD sin marca de agua, play_addr es estándar con marca
-    format_str = 'download_addr/download_addr-0/best' if format_type == 'hd' else 'play_addr/play_addr-0/best'
+    format_str = 'best[format_id*=download_addr]/bestvideo[format_id*=download_addr]/best' if format_type == 'hd' else 'best[format_id*=play_addr]/bestvideo[format_id*=play_addr]/best'
     
     ydl_opts = {
         'quiet': True,
