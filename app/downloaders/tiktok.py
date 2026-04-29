@@ -60,6 +60,7 @@ def download_tiktok(url: str, filename: str, format_type: str = "hd") -> str:
         'no_warnings': True,
         'outtmpl': filepath,
         'format': format_str,
+        'format_sort': ['size'],
         'http_headers': {
             'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         }
