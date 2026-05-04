@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-zinc-950 text-zinc-300 font-sans min-h-screen flex items-center justify-center p-4 selection:bg-zinc-800">
+    
+    <div class="w-full max-w-sm">
+        <header class="mb-8 text-center">
+            <h1 class="text-2xl font-semibold mb-2 text-white">Panel de Control</h1>
+            <p class="text-zinc-500 text-sm">Ingresa tus credenciales</p>
+        </header>
+
+        <main class="bg-zinc-900/50 border border-zinc-800/80 rounded-xl p-6 shadow-sm relative">
+            <a href="/" class="absolute -top-12 left-0 text-zinc-500 hover:text-white transition-colors flex items-center gap-1 text-sm">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver
+            </a>
+            
+            {% if error %}
+            <div class="mb-4 p-3 bg-red-950/30 border border-red-900/50 rounded-lg text-red-400 text-xs flex items-center gap-2">
+                <i data-lucide="alert-circle" class="w-4 h-4"></i>
+                <span>{{ error }}</span>
+            </div>
+            {% endif %}
+
+            <form action="/admin/login" method="POST" class="space-y-4">
+                <div>
+                    <label for="username" class="block text-xs font-medium text-zinc-500 mb-2 uppercase tracking-wider">Usuario</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-500">
+                            <i data-lucide="user" class="w-4 h-4"></i>
+                        </div>
+                        <input type="text" id="username" name="username" required 
+                            class="block w-full pl-9 pr-4 py-2.5 bg-zinc-950/50 border border-zinc-800 rounded-lg focus:ring-1 focus:ring-white focus:border-white transition-all text-zinc-200 placeholder-zinc-600 outline-none text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label for="password" class="block text-xs font-medium text-zinc-500 mb-2 uppercase tracking-wider">Contraseña</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-500">
+                            <i data-lucide="lock" class="w-4 h-4"></i>
+                        </div>
+                        <input type="password" id="password" name="password" required 
+                            class="block w-full pl-9 pr-4 py-2.5 bg-zinc-950/50 border border-zinc-800 rounded-lg focus:ring-1 focus:ring-white focus:border-white transition-all text-zinc-200 placeholder-zinc-600 outline-none text-sm">
+                    </div>
+                </div>
+                <button type="submit" 
+                    class="w-full py-2.5 mt-2 bg-white hover:bg-zinc-200 active:scale-[0.99] text-black font-medium rounded-lg transition-all flex justify-center items-center gap-2 text-sm">
+                    <span>Ingresar</span>
+                </button>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
